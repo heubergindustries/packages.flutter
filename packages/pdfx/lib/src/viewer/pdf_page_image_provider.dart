@@ -1,6 +1,6 @@
 // ignore: unnecessary_import
 import 'dart:typed_data';
-import 'dart:ui' as ui show Codec;
+import 'dart:ui' as ui show Codec, ImmutableBuffer;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -40,12 +40,13 @@ class PdfPageImageProvider extends ImageProvider<PdfPageImageProvider> {
 
     final loadedPdfPageImage = await pdfPageImage;
     final Uint8List bytes = loadedPdfPageImage.bytes;
-    final ImmutableBuffer buffer = await ImmutableBuffer.fromUint8List(bytes);
 
     if (bytes.lengthInBytes == 0) {
       throw StateError('${loadedPdfPageImage.pageNumber} page '
           'cannot be loaded as an image.');
     }
+
+    final ImmutableBuffer buffer = await ImmutableBuffer.fromUint8List(bytes);
 
     return decode(buffer);
   }
