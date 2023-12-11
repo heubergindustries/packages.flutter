@@ -20,7 +20,7 @@ class PdfPageImageProvider extends ImageProvider<PdfPageImageProvider> {
   final double scale;
 
   @override
-  ImageStreamCompleter loadImage(PdfPageImageProvider key,
+  ImageStreamCompleter load(PdfPageImageProvider key,
       DecoderBufferCallback decode) =>
       MultiFrameImageStreamCompleter(
         codec: _loadAsync(key, decode),
