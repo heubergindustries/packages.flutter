@@ -7,12 +7,11 @@ import 'package:flutter/widgets.dart';
 import 'package:pdfx/src/renderer/interfaces/page.dart';
 
 class PdfPageImageProvider extends ImageProvider<PdfPageImageProvider> {
-  const PdfPageImageProvider(
-    this.pdfPageImage,
-    this.pageNumber,
-    this.documentId, {
-    this.scale = 1.0,
-  });
+  const PdfPageImageProvider(this.pdfPageImage,
+      this.pageNumber,
+      this.documentId, {
+        this.scale = 1.0,
+      });
 
   final Future<PdfPageImage> pdfPageImage;
   final int pageNumber;
@@ -21,8 +20,8 @@ class PdfPageImageProvider extends ImageProvider<PdfPageImageProvider> {
   final double scale;
 
   @override
-  ImageStreamCompleter loadImage(
-          PdfPageImageProvider key, DecoderBufferCallback decode) =>
+  ImageStreamCompleter loadImage(PdfPageImageProvider key,
+      DecoderBufferCallback decode) =>
       MultiFrameImageStreamCompleter(
         codec: _loadAsync(key, decode),
         scale: key.scale,
@@ -35,10 +34,8 @@ class PdfPageImageProvider extends ImageProvider<PdfPageImageProvider> {
   Future<PdfPageImageProvider> obtainKey(ImageConfiguration configuration) =>
       SynchronousFuture<PdfPageImageProvider>(this);
 
-  Future<ui.Codec> _loadAsync(
-    PdfPageImageProvider key,
-    ImageDecoderCallback decode,
-  ) async {
+  Future<ui.Codec> _loadAsync(PdfPageImageProvider key,
+      DecoderBufferCallback decode,) async {
     assert(key == this);
 
     final loadedPdfPageImage = await pdfPageImage;
